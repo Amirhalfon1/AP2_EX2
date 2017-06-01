@@ -178,7 +178,7 @@
     <Resource Include="controlls\player.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\Source\Repos\ex1\ex1\SearchAlgorithmsLib\SearchAlgorithmsLib.csproj">
+    <ProjectReference Include="..\SearchAlgorithmsLib\SearchAlgorithmsLib.csproj">
       <Project>{60da5735-6a2c-4cd5-a488-747324cf3125}</Project>
       <Name>SearchAlgorithmsLib</Name>
     </ProjectReference>
