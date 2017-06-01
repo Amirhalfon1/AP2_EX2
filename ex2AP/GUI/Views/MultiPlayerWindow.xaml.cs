@@ -43,10 +43,28 @@ namespace GUI.Views
             startMultiplayerGame.Wait();
             //waitScreen.Close();
             waitWin.Close();
+            MyBoard.ReachedToGoal += PlayerReachedToGoal;
+            OtherBoard.ReachedToGoal += OtherReachedToGoal;
         }
         protected void notifyPlayCommand(object sender,EventArgs e)
         {
             vm.playToDirection(MyBoard.LastDirection);
+        }
+        protected void PlayerReachedToGoal(object sender, EventArgs e)
+        {
+            System.Windows.MessageBox.Show("You Won!");
+            Views.MainMenu menuWin = new Views.MainMenu();
+            menuWin.Show();
+            this.Close();
+
+        }
+        protected void OtherReachedToGoal(object sender, EventArgs e)
+        {
+            System.Windows.MessageBox.Show("You Lost!");
+            Views.MainMenu menuWin = new Views.MainMenu();
+            menuWin.Show();
+            this.Close();
+
         }
 
     }

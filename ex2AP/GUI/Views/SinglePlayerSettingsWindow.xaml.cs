@@ -26,22 +26,40 @@ namespace GUI
             SP_SettingsModel spSettingModel = new SP_SettingsModel();
             vm = new SP_SettingsViewModel(spSettingModel);
             this.DataContext = vm;
+            mazeProperties.startClicked += startClicked;
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
             vm.SaveSettings();
-            SinglePlayerWindow win = new SinglePlayerWindow();
-            
+           
+        }
+
+        protected void startClicked(object sender, EventArgs e)
+        {
+
+            SinglePlayerWindow win = new SinglePlayerWindow(mazeProperties.MazeName,mazeProperties.MazeRows,mazeProperties.MazeCols);
             win.Show();
             this.Close();
+
         }
 
         private void Window_Closed(object sender, EventArgs e)
         {
+        
             Views.MainMenu menuWin = new Views.MainMenu();
             menuWin.Show();
             this.Close();
+        }
+
+        private void MazePropertiesControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

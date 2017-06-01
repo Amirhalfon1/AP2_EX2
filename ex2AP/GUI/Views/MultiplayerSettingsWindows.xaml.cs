@@ -28,6 +28,7 @@ namespace GUI.Views
             vm = new MP_SettingsViewModel();
             this.DataContext = vm;
             vm.requestGamesList();
+            mazeProperties.startClicked += startClicked;
         }
 
         private void btnJoin_Click(object sender, RoutedEventArgs e)
@@ -42,12 +43,10 @@ namespace GUI.Views
             
             
         }
-
-        private void btnStart_Click(object sender, RoutedEventArgs e)
+        protected void startClicked(object sender, EventArgs e)
         {
-            //vm.startGame();
             string gameName;
-            if ((gameName = txtMazeName.Text.ToString()) != null)
+            if ((gameName = mazeProperties.MazeName) != null)
             {
                 //MultiplayerWaitingScreen waitScreen = new MultiplayerWaitingScreen();
                 //waitScreen.ShowDialog();
@@ -57,12 +56,29 @@ namespace GUI.Views
                 mpWindow.Show();
                 this.Close();
             }
+
         }
+
+        //private void btnStart_Click(object sender, RoutedEventArgs e)
+        //{
+        //    //vm.startGame();
+        //    string gameName;
+        //    if ((gameName = txtMazeName.Text.ToString()) != null)
+        //    {
+        //        //MultiplayerWaitingScreen waitScreen = new MultiplayerWaitingScreen();
+        //        //waitScreen.ShowDialog();
+        //        //System.Windows.MessageBox.Show("Waiting for other player");
+        //        MultiPlayerWindow mpWindow = new MultiPlayerWindow(vm.startGame(gameName));
+        //        //waitScreen.Close();
+        //        mpWindow.Show();
+        //        this.Close();
+        //    }
+        //}
 
         //private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         //{
-           
-            
+
+
         //}
 
         private void gamesComboBox_DropDownOpened(object sender, EventArgs e)

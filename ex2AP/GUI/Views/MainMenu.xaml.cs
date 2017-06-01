@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using GUI.Views;
 
 namespace GUI.Views
 {
@@ -22,6 +23,7 @@ namespace GUI.Views
         public MainMenu()
         {
             InitializeComponent();
+
         }
 
         private void singlePlayerBtn_Click(object sender, RoutedEventArgs e)
@@ -38,6 +40,13 @@ namespace GUI.Views
             mpSetWin.Show();
 
             this.Hide();
+        }
+
+        private void settingsBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            SettingsWindow settingsWin = new SettingsWindow();
+            settingsWin.ShowDialog();
         }
     }
 }

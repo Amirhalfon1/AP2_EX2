@@ -23,14 +23,12 @@ namespace GUI
     public partial class SinglePlayerWindow : Window
     {
         SinglePlayerViewModel vm;
-        public SinglePlayerWindow()
+        public SinglePlayerWindow(string mazeName , int mazeRows, int mazeCols)
         {
             InitializeComponent();
-
-
             vm = new SinglePlayerViewModel();
             this.DataContext = vm;
-            vm.StartGame();
+            vm.StartGame(mazeName,mazeRows,mazeCols);
             //this.Loaded += myMaze.UserControl_Loaded;
             this.KeyDown += myMaze.UserControl_KeyDown;
             myMaze.ReachedToGoal += reachedToGoal;
@@ -59,6 +57,7 @@ namespace GUI
             Views.MainMenu menuWin = new Views.MainMenu();
             menuWin.Show();
             this.Close();
+            
         }
     }
 }

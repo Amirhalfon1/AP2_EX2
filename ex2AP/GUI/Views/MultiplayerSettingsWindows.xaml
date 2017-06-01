@@ -3,13 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+               xmlns:Controls="clr-namespace:GUI.controlls"
         xmlns:local="clr-namespace:GUI.Views"
-        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         Title="MultiplayerSettingsWindows" Height="300" Width="300" Closed="Window_Closed">
-    <Grid TextBlock.FontSize="14">
+    <Grid TextBlock.FontSize="14" Height="259" VerticalAlignment="Bottom">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -17,9 +18,10 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" MinWidth="108"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+
         <Grid.Resources>
             <Style TargetType="TextBlock">
                 <Setter  Property="Padding" Value="8"/>
@@ -33,14 +35,10 @@
                 <Setter Property="Height" Value="35"/>
                 <Setter Property="VerticalAlignment"  Value="Bottom"/>
             </Style>        </Grid.Resources>
-        <TextBlock Grid.Row="2" Height="25" Margin="3,0,0,3" Width="81">Maze name:</TextBlock>        <TextBox x:Name="txtMazeName" Grid.Row="2" Grid.Column="1" Margin="3,0,3,3" Text="{Binding VM_MazeName}"></TextBox>        <TextBlock Grid.Row="0" Grid.Column="0" Height="25" Margin="3,0,0,3" Width="75" >List of games:</TextBlock>        <TextBlock Grid.Row="3" Height="25" Margin="3,0,0,3" Width="75" >Maze rows:</TextBlock>
-        <TextBox x:Name="txtRows" Grid.Row="3" Grid.Column="1" Margin="3,0,3,3" Text="{Binding VM_MazeRows}"></TextBox>
-        <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Height="25" Margin="3,0,0,3" Width="98">Maze columns:</TextBlock>
-        <TextBox x:Name="txtCols" Grid.Row="4" Grid.Column="1" Margin="3,0,3,3" Text="{Binding VM_MazeCols}" ></TextBox>
-        <Button x:Name="btnStart" Grid.Row="6" HorizontalAlignment="Left" 
-        Padding="5" Grid.Column="1" Click="btnStart_Click"  >Start Game</Button>        <Button x:Name="btnJoin" Grid.Row="1" HorizontalAlignment="Left" 
-        Padding="5" Grid.Column="1" Click="btnJoin_Click">Join Game</Button>
-        <ComboBox x:Name="gamesComboBox" Grid.Column="1" HorizontalAlignment="Left" Margin="13,3,3,3" VerticalAlignment="Top" Width="120" ItemsSource="{Binding VM_GamesList}"  DropDownOpened="gamesComboBox_DropDownOpened"/>
+
+        <Border Background="LightBlue" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,-14,0,0"></Border>        <TextBlock Grid.Row="0" Grid.Column="0" Height="33" Margin="3,10,0,31" Width="98" Grid.RowSpan="2" >List of games:</TextBlock>        <Button x:Name="btnJoin" Grid.Row="1" HorizontalAlignment="Left" 
+        Padding="5" Grid.Column="1" Click="btnJoin_Click" Width="76" Margin="5,3,0,3">Join Game</Button>
+        <ComboBox x:Name="gamesComboBox" Grid.Column="1" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding VM_GamesList}"  DropDownOpened="gamesComboBox_DropDownOpened" Height="25"/>        <Controls:MazePropertiesControl x:Name="mazeProperties" Grid.Row="3" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="168" Margin="0,0,7,0" Grid.RowSpan="2"/>
 
     </Grid>
 </Window>

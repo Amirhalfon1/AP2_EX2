@@ -4,10 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI"
+       xmlns:Controls="clr-namespace:GUI.controlls"
         mc:Ignorable="d"
-        Title="Single Player Settings" Height="250" Width="250" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
-    <Grid TextBlock.FontSize="14">
-        <Grid.RowDefinitions>
+        Title="Single Player Settings" Height="235.944" Width="290.161" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
+    <Grid TextBlock.FontSize="14" Margin="0,0,14,13" Loaded="Grid_Loaded">
+        <Controls:MazePropertiesControl x:Name="mazeProperties" VerticalAlignment="Center" Loaded="MazePropertiesControl_Loaded"></Controls:MazePropertiesControl>
+        <!--<Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -35,7 +37,7 @@
         <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Height="25" Margin="3,0,0,3" Width="98">Maze columns:</TextBlock>
         <TextBox x:Name="txtCols" Grid.Row="2" Grid.Column="1" Margin="3,0,3,3" Text="{Binding VM_MazeCols}" ></TextBox>
         <Button x:Name="btnStart" Grid.Row="3" HorizontalAlignment="Left" 
-        Padding="5" Grid.Column="1" Click="btnStart_Click" >Start Game</Button>
+        Padding="5" Grid.Column="1" Click="btnStart_Click" >Start Game</Button>-->
 
     </Grid>
 

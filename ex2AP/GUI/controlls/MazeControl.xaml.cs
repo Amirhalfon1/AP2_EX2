@@ -111,6 +111,12 @@ namespace GUI.controlls
             get { return (Position)GetValue(GoalPositionProperty); }
             set { SetValue(GoalPositionProperty, value); }
         }
+        public static readonly DependencyProperty StartPositionProperty = DependencyProperty.Register("StartPosition", typeof(Position), typeof(MazeControl));
+        public Position StartPosition
+        {
+            get { return (Position)GetValue(StartPositionProperty); }
+            set { SetValue(StartPositionProperty, value); }
+        }
         public static readonly DependencyProperty SolutionProperty = DependencyProperty.Register("Solution", typeof(string), typeof(MazeControl), new PropertyMetadata(onSolutionPropertyChanged));
         public string Solution
         {
@@ -159,6 +165,7 @@ namespace GUI.controlls
                             rectArray[i, j].Fill = new SolidColorBrush(System.Windows.Media.Colors.Black);
                             break;
                         case '*':
+
                             //rectArray[i, j].Fill = new SolidColorBrush(System.Windows.Media.Colors.Yellow);
                             rectArray[i, j].Fill = playerImage;
                             CurrentPosition = new Position(i, j);
@@ -198,11 +205,17 @@ namespace GUI.controlls
                     movePlayerRight();
                     break;
             }
+            if ((CurrentPosition.Col == GoalPosition.Col) && (CurrentPosition.Row == GoalPosition.Row))
+            {
+                //System.Windows.MessageBox.Show("You Won!");
+                ReachedToGoalActuator(this, null);
+            }
             //OtherPlayerMove = null;
         }
 
         private void SolveMazeAnimation()
         {
+            CurrentPosition = new Position(StartPosition.Row, StartPosition.Col);
             int timeToWait = Solution.Length;
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(0.25);
@@ -216,7 +229,7 @@ namespace GUI.controlls
             {
                 return;
             }
-
+            //CurrentPosition = new Position(pos)
             char directionChar = Solution[solCurrentIndex];
             switch (directionChar)
             {

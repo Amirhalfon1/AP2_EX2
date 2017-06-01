@@ -30,5 +30,8 @@ namespace GUI.Properties
 
         public string MazeName { get; internal set; }
         public int MazeRows { get; internal set; }
+        public string ServerIP { get; internal set; }
+        public int ServerPort { get; internal set; }
+        public int SearchAlgorithm { get; internal set; }
     }
 }

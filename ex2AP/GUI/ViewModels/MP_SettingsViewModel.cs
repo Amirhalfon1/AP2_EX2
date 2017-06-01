@@ -39,15 +39,15 @@ namespace GUI.ViewModels
                 NotifyPropertyChanged("VM_MazeCols");
             }
         }
-        public string VM_MazeName
-        {
-            get { return model.MazeName; }
-            set
-            {
-                model.MazeName = value;
-                NotifyPropertyChanged("VM_MazeName");
-            }
-        }
+        //public string VM_MazeName
+        //{
+        //    get { return model.MazeName; }
+        //    set
+        //    {
+        //        model.MazeName = value;
+        //        NotifyPropertyChanged("VM_MazeName");
+        //    }
+        //}
         public ObservableCollection<string> VM_GamesList
         {
             get { return model.GamesList; }

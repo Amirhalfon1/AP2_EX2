@@ -17,7 +17,7 @@
         <Button x:Name="singlePlayerBtn" Content="Single Player" Grid.Row="0" Padding="2" Click="singlePlayerBtn_Click" />
         <Button x:Name="multiPlayerBtn" Content="Multi Player"  Grid.Row="1" Padding="2" Click="multiPlayerBtn_Click" />
         <Button x:Name="settingsBtn" Content="Settings"  Grid.Row="2" Padding="2
-                " />
+                " Click="settingsBtn_Click" />
         <Image x:Name="MazeImage" HorizontalAlignment="Left" Height="70" Margin="-67,-65,0,0" VerticalAlignment="Top" Width="80" Source="../mazeLogo.png" Stretch="Fill" />
 
 

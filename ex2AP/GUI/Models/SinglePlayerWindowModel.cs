@@ -21,6 +21,8 @@ namespace GUI
         private string otherDirection;
         private string currentCommand;
         private ObservableCollection<string> gamesList;
+        int mazeRows;
+        int mazeCols;
         public SinglePlayerWindowModel()
         {
             GamesList = new ObservableCollection<string>();
@@ -70,20 +72,32 @@ namespace GUI
                 NotifyPropertyChanged("GamesList");
             }
         }
-        public String MazeName
-        {
-            get { return Properties.Settings.Default.MazeName; }
-            set { Properties.Settings.Default.MazeName = value; }
-        }
+        //public String MazeName
+        //{
+        //    get { return Properties.Settings.Default.MazeName; }
+        //    set { MazeName = value; }
+        //}
         public int MazeRows
         {
-            get { return Properties.Settings.Default.MazeRows; }
-            set { Properties.Settings.Default.MazeRows = value; }
+            get {
+                    if(this.mazeRows == 0)
+                    {
+                        return Properties.Settings.Default.MazeRows;
+                    }
+                    return this.mazeRows;
+                 }
+            set { this.mazeRows = value; ; }
         }
         public int MazeCols
         {
-            get { return Properties.Settings.Default.MazeCols; }
-            set { Properties.Settings.Default.MazeCols = value; }
+            get {
+                if (this.mazeCols == 0)
+                {
+                    return Properties.Settings.Default.MazeCols;
+                }
+                return this.mazeCols;
+                 }
+            set { this.mazeCols = value; }
         }
         public void Connect(string command)
         {

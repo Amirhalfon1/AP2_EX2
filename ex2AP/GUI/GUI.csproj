@@ -35,10 +35,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MazeGeneratorLib">
-      <HintPath>..\..\..\..\Study\Second Year\MazeGeneratorLib.dll</HintPath>
+      <HintPath>..\..\..\..\..\MazeGeneratorLib.dll</HintPath>
     </Reference>
     <Reference Include="MazeLib">
-      <HintPath>..\..\..\..\Study\Second Year\MazeLib.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Source\Repos\ex1\ex1\ServerProject\bin\Debug\MazeLib.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -69,18 +69,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="controlls\MazePropertiesControl.xaml.cs">
+      <DependentUpon>MazePropertiesControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\MP_SettingsModel.cs" />
+    <Compile Include="Models\SettingsModel.cs" />
     <Compile Include="ViewModels\MP_SettingsViewModel.cs" />
     <Compile Include="ViewModels\MultiPlayerViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\SinglePlayerViewModel.cs" />
     <Compile Include="Models\SinglePlayerWindowModel.cs" />
     <Compile Include="Models\SP_SettingsModel.cs" />
     <Compile Include="ViewModels\SP_SettingsViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
-    <Compile Include="controlls\Bla.xaml.cs">
-      <DependentUpon>Bla.xaml</DependentUpon>
-    </Compile>
     <Compile Include="controlls\MazeControl.xaml.cs">
       <DependentUpon>MazeControl.xaml</DependentUpon>
     </Compile>
@@ -96,14 +98,14 @@
     <Compile Include="Views\MultiPlayerWindow.xaml.cs">
       <DependentUpon>MultiPlayerWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SinglePlayerSettingsWindow.xaml.cs">
       <DependentUpon>SinglePlayerSettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SinglePlayerWindow.xaml.cs">
       <DependentUpon>SinglePlayerWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LecExample.xaml.cs">
-      <DependentUpon>LecExample.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -134,11 +136,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="controlls\Bla.xaml">
+    <Page Include="controlls\MazeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="controlls\MazeControl.xaml">
+    <Page Include="controlls\MazePropertiesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -158,15 +160,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SinglePlayerSettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SinglePlayerWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LecExample.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

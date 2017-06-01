@@ -24,12 +24,12 @@ namespace GUI
                     NotifyPropertyChanged("VM_" + e.PropertyName);
                 };
         }
-        public void StartGame()
+        public void StartGame(string mazeName, int mazeRows, int mazeCols)
         {
             string command = "generate ";
-            command += Properties.Settings.Default.MazeName + " ";
-            command += Properties.Settings.Default.MazeRows + " ";
-            command += Properties.Settings.Default.MazeCols;
+            command += mazeName + " ";
+            command += mazeRows.ToString() + " ";
+            command += mazeCols.ToString();
             this.model.Connect(command);
         }
         public Maze VM_maze
@@ -63,7 +63,7 @@ namespace GUI
         public void SolveGame(char alg)
         {
             string command = "solve ";
-            command += Properties.Settings.Default.MazeName + " ";
+            command += model.Maze.Name + " ";
             command += alg;
             this.model.Connect(command);
         }
