@@ -61,6 +61,8 @@ namespace GUI.ViewModels
             playCommand += direction;
             model.CurrentCommand = playCommand;
         }
+
+
         //public Position PlayerPosition
         //{
         //    get { return model.Maze; }
@@ -82,6 +84,10 @@ namespace GUI.ViewModels
         public void StartGame(string command)
         {
             this.model.Connect(command);
+        }
+        public void CloseGame()
+        {
+            model.CurrentCommand = "close";
         }
     }
 }

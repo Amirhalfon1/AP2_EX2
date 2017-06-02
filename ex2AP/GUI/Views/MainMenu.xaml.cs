@@ -23,14 +23,15 @@ namespace GUI.Views
         public MainMenu()
         {
             InitializeComponent();
-
+            Properties.Settings.Default.ServerIP = "127.0.0.1";
+            Properties.Settings.Default.ServerPort = 49251;
         }
 
         private void singlePlayerBtn_Click(object sender, RoutedEventArgs e)
         {
             SinglePlayerSettingsWindow spSetWin = new SinglePlayerSettingsWindow();
-            spSetWin.ShowDialog();
-            this.Close();
+            spSetWin.Show();
+            this.Hide();
             
         }
 

@@ -37,7 +37,8 @@ namespace GUI
         }
         private void btnSolve_Click(object sender, RoutedEventArgs e)
         {
-            vm.SolveGame('0');
+            
+            vm.SolveGame((char)Properties.Settings.Default.SearchAlgorithm);
             //vm.SaveSettings();
             //SinglePlayerWindow win = new SinglePlayerWindow();
 

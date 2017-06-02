@@ -60,11 +60,11 @@ namespace GUI
                 NotifyPropertyChanged("VM_solution");
             }
         }
-        public void SolveGame(char alg)
+        public void SolveGame(int alg)
         {
             string command = "solve ";
             command += model.Maze.Name + " ";
-            command += alg;
+            command += alg.ToString();
             this.model.Connect(command);
         }
     }

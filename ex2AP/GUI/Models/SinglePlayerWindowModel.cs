@@ -23,6 +23,8 @@ namespace GUI
         private ObservableCollection<string> gamesList;
         int mazeRows;
         int mazeCols;
+        public event EventHandler otherClosed;
+
         public SinglePlayerWindowModel()
         {
             GamesList = new ObservableCollection<string>();
@@ -99,11 +101,16 @@ namespace GUI
                  }
             set { this.mazeCols = value; }
         }
+        protected void otherClosedActuator(object sender, EventArgs e)
+        {
+            this.otherClosed?.Invoke(this, e);
+        }
         public void Connect(string command)
         {
             bool multiPlayerStarted = false;
-            int port = int.Parse(ConfigurationSettings.AppSettings["port"]);
-            IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
+          
+            int port = Properties.Settings.Default.ServerPort;
+            IPEndPoint ep = new IPEndPoint(IPAddress.Parse(Properties.Settings.Default.ServerIP), port);
             TcpClient client = new TcpClient();
             client.Connect(ep);
             Console.WriteLine("Client has been connected");
@@ -229,7 +236,7 @@ namespace GUI
                                 //}
                                 if (CurrentCommand != null)
                                 {
-                                    Console.WriteLine("CURENTTTTTTTT COMANNNNNNNND");
+                                   // Console.WriteLine("CURENTTTTTTTT COMANNNNNNNND");
                                     command = CurrentCommand;
                                     if (command.Contains("close"))
                                     {
@@ -246,6 +253,7 @@ namespace GUI
                                 
                                 //break;/////////////////////
                             }
+                            Console.WriteLine("Writer Task Finished");
                         });
                         Task readerTask = new Task(() =>
                         {
@@ -288,10 +296,15 @@ namespace GUI
                                     writer.WriteLine(feedback);
                                     writer.Flush();
                                     close = true;
+                                    CurrentCommand = "close";
+
+                                    otherClosedActuator(this, null);
+
                                     Console.WriteLine("other player closed connection");
                                     getNewCommand = false;
                                 }
                             }
+                            Console.WriteLine("Reader Task Finished");
                         });
                         writerTask.Start();
                         readerTask.Start();

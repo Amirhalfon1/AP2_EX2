@@ -32,16 +32,16 @@
             </Style>
         </Grid.Resources>
         <TextBlock>Server IP:</TextBlock>
-        <TextBox x:Name="txtIP" Grid.Column="1" Text="{Binding ServerIP,Mode=OneWay}"></TextBox>
+        <TextBox x:Name="txtIP" Grid.Column="1" Text="{Binding ServerIP}"></TextBox>
         <TextBlock Grid.Row="1">Server Port:</TextBlock>
-        <TextBox x:Name="txtPort" Grid.Row="1" Grid.Column="2" Text="{Binding ServerPort,Mode=OneWay}"></TextBox>
+        <TextBox x:Name="txtPort" Grid.Row="1" Grid.Column="2" Text="{Binding ServerPort}"></TextBox>
         <TextBlock Grid.Row="2">Maze rows:</TextBlock>
-        <TextBox x:Name="txtRows" Grid.Row="2"  Grid.Column="1"  Text="{Binding MazeRows,Mode=OneWay}" RenderTransformOrigin="0.516,0.586"/>
+        <TextBox x:Name="txtRows" Grid.Row="2"  Grid.Column="1"  Text="{Binding MazeRows}" RenderTransformOrigin="0.516,0.586"/>
         <TextBlock Grid.Row="3">Maze columns:</TextBlock>
-        <TextBox x:Name="txtCols" Grid.Row="3" Grid.Column="2" Height="30" Text="{Binding MazeCols,Mode=OneWay}"></TextBox>
+        <TextBox x:Name="txtCols" Grid.Row="3" Grid.Column="2" Height="30" Text="{Binding MazeCols}"></TextBox>
         <TextBlock Grid.Row="4">Search algorithm:</TextBlock>
         <ComboBox x:Name="cboSearchAlgo" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left"
-SelectedIndex="{Binding SearchAlgorithm,Mode=OneWay}" IsEditable="False" Width="73" Margin="7,0,0,0">
+        SelectedIndex="{Binding SearchAlgorithm}" IsEditable="False" Width="73" Margin="7,0,0,0">
             <ComboBoxItem>BFS</ComboBoxItem>
             <ComboBoxItem>DFS</ComboBoxItem>
         </ComboBox>

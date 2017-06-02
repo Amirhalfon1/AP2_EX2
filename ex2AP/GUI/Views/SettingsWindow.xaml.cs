@@ -38,6 +38,7 @@ namespace GUI.Views
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            //Properties.Settings.Default.Reload();
             Properties.Settings.Default.Reload();
             MainMenu win = (MainMenu)Application.Current.MainWindow;
             win.Show();

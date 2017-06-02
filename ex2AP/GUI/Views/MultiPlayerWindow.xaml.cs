@@ -56,7 +56,6 @@ namespace GUI.Views
             Views.MainMenu menuWin = new Views.MainMenu();
             menuWin.Show();
             this.Close();
-
         }
         protected void OtherReachedToGoal(object sender, EventArgs e)
         {
@@ -65,6 +64,11 @@ namespace GUI.Views
             menuWin.Show();
             this.Close();
 
+        }
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            vm.CloseGame();
+            //e.Cancel = true;
         }
 
     }
