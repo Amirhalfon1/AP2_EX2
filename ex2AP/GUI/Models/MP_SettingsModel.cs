@@ -10,11 +10,11 @@ namespace GUI.Models
     {
 
 
-        public String MazeName
-        {
-            get { return Properties.Settings.Default.MazeName;}
-            set { Properties.Settings.Default.MazeName = value; }
-        }
+        //public String MazeName
+        //{
+        //    get { return Properties.Settings.Default.MazeName;}
+        //    set { Properties.Settings.Default.MazeName = value; }
+        //}
         public int MazeRows
         {
             get { return Properties.Settings.Default.MazeRows; }

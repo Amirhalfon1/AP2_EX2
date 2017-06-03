@@ -31,15 +31,7 @@ namespace GUI
                 NotifyPropertyChanged("VM_MazeCols");
             }
         }
-        public string VM_MazeName
-        {
-            get { return model.MazeName; }
-            set
-            {
-                model.MazeName = value;
-                NotifyPropertyChanged("VM_MazeName");
-            }
-        }
+
         public void SaveSettings()
         {
             model.SaveSettings();
