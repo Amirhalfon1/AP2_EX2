@@ -68,5 +68,6 @@ namespace GUI.ViewModels
         {
             model.SaveSettings();
         }
-    }
+    }
+
 }
