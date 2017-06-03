@@ -253,6 +253,7 @@ namespace GUI
                                 
                                 //break;/////////////////////
                             }
+                            otherClosedActuator(this, null);
                             Console.WriteLine("Writer Task Finished");
                         });
                         Task readerTask = new Task(() =>
@@ -264,7 +265,7 @@ namespace GUI
                                 while (true)
                                 {
                                     serverFeedback = reader.ReadLine();
-                                    
+
                                     if (reader.Peek() == '@')
                                     {
                                         {
@@ -291,18 +292,18 @@ namespace GUI
                                     OtherDirection = wholeFeedback;
 
                                 }
-                                if (feedback == "close")
+
+                                if (wholeFeedback == "close")
                                 {
                                     writer.WriteLine(feedback);
                                     writer.Flush();
                                     close = true;
                                     CurrentCommand = "close";
-
-                                    otherClosedActuator(this, null);
-
+                   
                                     Console.WriteLine("other player closed connection");
                                     getNewCommand = false;
                                 }
+                                
                             }
                             Console.WriteLine("Reader Task Finished");
                         });

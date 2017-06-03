@@ -45,6 +45,7 @@ namespace GUI.Views
             waitWin.Close();
             MyBoard.ReachedToGoal += PlayerReachedToGoal;
             OtherBoard.ReachedToGoal += OtherReachedToGoal;
+            vm.SignCloseDelegate(OtherClosedConnection);
         }
         protected void notifyPlayCommand(object sender,EventArgs e)
         {
@@ -69,6 +70,13 @@ namespace GUI.Views
         {
             vm.CloseGame();
             //e.Cancel = true;
+        }
+
+        protected void OtherClosedConnection(object sender, EventArgs e)
+        {
+            MainMenu win = new MainMenu();
+            win.Show();
+            this.Close();
         }
 
     }
