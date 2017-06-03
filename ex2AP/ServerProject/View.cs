@@ -48,6 +48,10 @@ namespace ServerProject
                             }
                             //Console.WriteLine(commandLine);
                             string result = controller.executeCommand(commandLine, client);
+                            if (result.Contains("close"))
+                            {
+                                Console.WriteLine("BLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                            }
                             //Console.WriteLine("the result we wanna send: {0}", result);
                             result += '\n';
                             result += '@';

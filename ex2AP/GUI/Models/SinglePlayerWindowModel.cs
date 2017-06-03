@@ -241,6 +241,7 @@ namespace GUI
                                     if (command.Contains("close"))
                                     {
                                         close = true;
+                                       // break;
                                         multiPlayerStarted = false;
                                     }
                                     writer.WriteLine(command);
@@ -280,29 +281,29 @@ namespace GUI
                                     //Console.WriteLine("{0}", serverFeedback);
                                 }
                                 reader.ReadLine();
-                                //if(!multiPlayerStarted)
-                                //{
-                                //    Console.WriteLine(serverFeedback);
-                                //    multiPlayerStarted = true;
-                                //    Maze = Maze.FromJSON(serverFeedback);
-                                //}
+                                Console.WriteLine(wholeFeedback);
                                 if (wholeFeedback.Contains("Direction"))
                                 {
                                     OtherDirection = wholeFeedback;
 
                                 }
-                                if (feedback == "close")
+                                if (wholeFeedback != null)
                                 {
-                                    writer.WriteLine(feedback);
-                                    writer.Flush();
-                                    close = true;
-                                    CurrentCommand = "close";
+                                    if (wholeFeedback.StartsWith("close")) 
+                                    {
+                                        //writer.WriteLine(wholeFeedback);
+                                        //writer.Flush();
+                                        //close = true;
+                                        CurrentCommand = "close";
 
-                                    otherClosedActuator(this, null);
+                                        otherClosedActuator(this, null);
 
-                                    Console.WriteLine("other player closed connection");
-                                    getNewCommand = false;
+                                        //Console.WriteLine("other player closed connection");
+                                        getNewCommand = false;
+                                        break;
+                                    }
                                 }
+
                             }
                             Console.WriteLine("Reader Task Finished");
                         });
