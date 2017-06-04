@@ -89,5 +89,11 @@ namespace GUI.ViewModels
         {
             model.CurrentCommand = "close";
         }
+
+        public void SignCloseDelegate(EventHandler eventHandler)
+        {
+            model.otherClosed += eventHandler;
+        }
+
     }
 }

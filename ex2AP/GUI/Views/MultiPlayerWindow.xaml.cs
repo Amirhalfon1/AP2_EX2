@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GUI.ViewModels;
+using System.Windows.Threading;
 
 namespace GUI.Views
 {
@@ -45,6 +46,7 @@ namespace GUI.Views
             waitWin.Close();
             MyBoard.ReachedToGoal += PlayerReachedToGoal;
             OtherBoard.ReachedToGoal += OtherReachedToGoal;
+            vm.SignCloseDelegate(OtherClosedConnection);
         }
         protected void notifyPlayCommand(object sender,EventArgs e)
         {
@@ -69,6 +71,18 @@ namespace GUI.Views
         {
             vm.CloseGame();
             //e.Cancel = true;
+        }
+
+        protected void OtherClosedConnection(object sender, EventArgs e)
+        {
+            System.Windows.Application.Current.Dispatcher.Invoke(
+           DispatcherPriority.Background,
+           new Action(() =>
+           {
+               MainMenu win = new MainMenu();
+               win.Show();
+               this.Close();
+           }));
         }
 
     }
