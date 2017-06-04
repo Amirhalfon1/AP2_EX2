@@ -11,6 +11,8 @@ using MazeLib;
 using Newtonsoft.Json;
 using SearchAlgorithmsLib;
 using System.Collections.ObjectModel;
+using System.Windows;
+using learnWPF.Models;
 
 namespace GUI
 {
@@ -112,10 +114,34 @@ namespace GUI
             int port = Properties.Settings.Default.ServerPort;
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse(Properties.Settings.Default.ServerIP), port);
             TcpClient client = new TcpClient();
-            client.Connect(ep);
-            Console.WriteLine("Client has been connected");
-            
-            //string command = null;
+            //try
+            //{
+            //    client.Connect(ep);
+            //}catch(Exception e)
+            //{
+            //    MessageBox.Show("Couldn't connect to the server");
+            //    return;
+            //}
+            try
+            {
+                client.Connect(ep);
+            }
+            catch (ArgumentNullException e)
+            {
+                CheckingConnection.isConnectionEstablished = false;
+                return;
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                CheckingConnection.isConnectionEstablished = false;
+                return;
+            }
+            catch (SocketException e)
+            {
+                CheckingConnection.isConnectionEstablished = false;
+                return;
+            }
+            CheckingConnection.isConnectionEstablished = true;
             bool getNewCommand = true;
             NetworkStream stream = client.GetStream();
             StreamReader reader = new StreamReader(stream);
@@ -258,6 +284,7 @@ namespace GUI
                         });
                         Task readerTask = new Task(() =>
                         {
+                            bool otherClosed = false;
                             while (!close)
                             {
                                 string serverFeedback = "";
@@ -265,7 +292,11 @@ namespace GUI
                                 while (true)
                                 {
                                     serverFeedback = reader.ReadLine();
-
+                                    if(serverFeedback == "close")
+                                    {
+                                        otherClosed = true;
+                                        break;
+                                    }
                                     if (reader.Peek() == '@')
                                     {
                                         {
@@ -281,6 +312,15 @@ namespace GUI
                                     //Console.WriteLine("{0}", serverFeedback);
                                 }
                                 reader.ReadLine();
+                                if (otherClosed)
+                                {
+                                    close = true;
+                                    CurrentCommand = "close";
+
+                                    Console.WriteLine("other player closed connection");
+                                    getNewCommand = false;
+                                    
+                                }
                                 //if(!multiPlayerStarted)
                                 //{
                                 //    Console.WriteLine(serverFeedback);
@@ -293,19 +333,15 @@ namespace GUI
 
                                 }
 
-                                if (feedback == "close")
-                                {
-                                    writer.WriteLine(feedback);
-                                    writer.Flush();
-                                    close = true;
-                                    CurrentCommand = "close";
-                   
-                                    Console.WriteLine("other player closed connection");
-                                    getNewCommand = false;
-                                    otherClosedActuator(this, null);
-                                }
+                                //if (feedback == "close")
+                                //{
+                                //    writer.WriteLine(feedback);
+                                //    writer.Flush();
+
+                                //}
                                 
                             }
+                            otherClosedActuator(this, null);
                             Console.WriteLine("Reader Task Finished");
                         });
                         writerTask.Start();

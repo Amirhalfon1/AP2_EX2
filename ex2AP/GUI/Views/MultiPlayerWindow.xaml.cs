@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GUI.ViewModels;
 using System.Windows.Threading;
+using System.Windows.Forms;
 
 namespace GUI.Views
 {
@@ -21,13 +22,16 @@ namespace GUI.Views
     /// </summary>
     public partial class MultiPlayerWindow : Window
     {
+        private bool otherWon;
+        private bool playerWon;
         private MultiPlayerViewModel vm;
         private Task startMultiplayerGame;
         public MultiPlayerWindow(string command)
         {
             InitializeComponent();
             vm = new MultiPlayerViewModel();
-           
+            otherWon = false;
+            playerWon = false;
             this.DataContext = vm;
             this.KeyDown += MyBoard.UserControl_KeyDown;
             MyBoard.playerMoved += notifyPlayCommand;
@@ -48,19 +52,22 @@ namespace GUI.Views
             OtherBoard.ReachedToGoal += OtherReachedToGoal;
             vm.SignCloseDelegate(OtherClosedConnection);
         }
-        protected void notifyPlayCommand(object sender,EventArgs e)
+        protected void notifyPlayCommand(object sender, EventArgs e)
         {
             vm.playToDirection(MyBoard.LastDirection);
         }
         protected void PlayerReachedToGoal(object sender, EventArgs e)
         {
+            playerWon = true;
             System.Windows.MessageBox.Show("You Won!");
             Views.MainMenu menuWin = new Views.MainMenu();
+            vm.CloseGame();
             menuWin.Show();
             this.Close();
         }
         protected void OtherReachedToGoal(object sender, EventArgs e)
         {
+            otherWon = true;
             System.Windows.MessageBox.Show("You Lost!");
             Views.MainMenu menuWin = new Views.MainMenu();
             menuWin.Show();
@@ -69,12 +76,36 @@ namespace GUI.Views
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            vm.CloseGame();
+            //string message = "Are you sure you want to finish the game?";
+            //string caption = "Warning";
+            //MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            //DialogResult result;
+
+            //result = System.Windows.Forms.MessageBox.Show(message, caption, buttons);
+
+            //if (result == System.Windows.Forms.DialogResult.No)
+            //{
+            //    return;
+            //}
+            //if (result == System.Windows.Forms.DialogResult.Yes)
+            //{
+
+            //    this.Closing -= Window_Closing;
+            //    vm.CloseGame();
+
+            //}
+            //vm.CloseGame();
+            //MainMenu win = new MainMenu();
+            //win.Show();
             //e.Cancel = true;
         }
 
         protected void OtherClosedConnection(object sender, EventArgs e)
         {
+            if (otherWon || playerWon)
+            {
+                return;
+            }
             System.Windows.Application.Current.Dispatcher.Invoke(
            DispatcherPriority.Background,
            new Action(() =>
@@ -84,6 +115,26 @@ namespace GUI.Views
                this.Close();
            }));
         }
+        private void menuBtn_CLick(object sender, RoutedEventArgs e)
+        {
+            string message = "Are you sure you want to finish the game?";
+            string caption = "Warning";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result;
 
+            result = System.Windows.Forms.MessageBox.Show(message, caption, buttons);
+
+            if (result == System.Windows.Forms.DialogResult.No)
+            {
+                return;
+            }
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+
+                this.Closing -= Window_Closing;
+                vm.CloseGame();
+
+            }
+        }
     }
 }

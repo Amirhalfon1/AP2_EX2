@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GUI.Views;
+using learnWPF.Models;
 
 namespace GUI.Views
 {
@@ -31,21 +32,23 @@ namespace GUI.Views
         {
             SinglePlayerSettingsWindow spSetWin = new SinglePlayerSettingsWindow();
             spSetWin.Show();
-            this.Hide();
+            this.Close();
             
         }
 
         private void multiPlayerBtn_Click(object sender, RoutedEventArgs e)
         {
             MultiplayerSettingsWindows mpSetWin = new MultiplayerSettingsWindows();
-            mpSetWin.Show();
+            if (CheckingConnection.isConnectionEstablished)
+            {
+                mpSetWin.Show();
 
-            this.Hide();
+                this.Close();
+            }
         }
 
         private void settingsBtn_Click(object sender, RoutedEventArgs e)
         {
-
             SettingsWindow settingsWin = new SettingsWindow();
             settingsWin.ShowDialog();
         }

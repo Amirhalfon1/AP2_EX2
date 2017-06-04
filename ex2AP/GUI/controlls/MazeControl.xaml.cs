@@ -215,10 +215,15 @@ namespace GUI.controlls
 
         private void SolveMazeAnimation()
         {
+            if (CurrentPosition.Row != StartPosition.Row || CurrentPosition.Col != StartPosition.Col)
+            {
+                rectArray[CurrentPosition.Row, CurrentPosition.Col].Fill = new SolidColorBrush(System.Windows.Media.Colors.White);
+                rectArray[StartPosition.Row, StartPosition.Col].Fill = playerImage;
+            }
             CurrentPosition = new Position(StartPosition.Row, StartPosition.Col);
             int timeToWait = Solution.Length;
             DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(0.25);
+            timer.Interval = TimeSpan.FromSeconds(0.06);
             timer.Tick += timer_Tick;
             timer.Start();
         }
@@ -350,6 +355,13 @@ namespace GUI.controlls
         {
             //var window = Window.GetWindow(this);
             //window.KeyDown += UserControl_KeyDown;
+        }
+
+        public void RestartGame()
+        {
+            rectArray[CurrentPosition.Row,CurrentPosition.Col].Fill = new SolidColorBrush(System.Windows.Media.Colors.White);
+            CurrentPosition = new Position(StartPosition.Row, StartPosition.Col);
+            rectArray[CurrentPosition.Row, CurrentPosition.Col].Fill = playerImage;
         }
 
 

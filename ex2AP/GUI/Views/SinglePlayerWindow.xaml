@@ -13,7 +13,7 @@
                                   Order="{Binding VM_maze}" RenderTransformOrigin="0,0" Margin="0,23,0,0" 
                                   GoalPosition="{Binding VM_maze.GoalPos}" StartPosition="{Binding VM_maze.InitialPos}" Solution="{Binding VM_solution}">
             </Controls:MazeControl>
-            <Button x:Name="btnRestart" Content="Restart" HorizontalAlignment="Left" Margin="10,2,0,0" VerticalAlignment="Top" Width="75" />
+            <Button x:Name="btnRestart" Content="Restart" HorizontalAlignment="Left" Margin="10,2,0,0" VerticalAlignment="Top" Width="75" Click="btnRestart_Click" />
             <Button x:Name="btnSolve" Content="Solve" HorizontalAlignment="Left" Margin="103,2,0,0" VerticalAlignment="Top" Width="75" Click="btnSolve_Click"/>
             <Button x:Name="btnBack" Content="Main Menu" HorizontalAlignment="Left" Margin="195,2,0,0" VerticalAlignment="Top" Width="75" Click="btnBack_Click" />
 

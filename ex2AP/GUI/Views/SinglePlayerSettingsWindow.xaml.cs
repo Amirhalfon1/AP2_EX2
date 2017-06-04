@@ -1,4 +1,5 @@
-﻿using System;
+﻿using learnWPF.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -35,15 +37,49 @@ namespace GUI
            
         }
 
+        //protected void startClicked(object sender, EventArgs e)
+        //{
+
+        //    SinglePlayerWindow win = new SinglePlayerWindow(mazeProperties.MazeName,mazeProperties.MazeRows,mazeProperties.MazeCols);
+        //    win.Show();
+        //    this.Closed -= Window_Closed;
+        //    this.Close();
+
+        //}
         protected void startClicked(object sender, EventArgs e)
         {
+            SinglePlayerWindow win = new SinglePlayerWindow(mazeProperties.MazeName,
+                mazeProperties.MazeRows, mazeProperties.MazeCols);
+            if (CheckingConnection.isConnectionEstablished)
+            {
+                win.Show();
+                this.Closed -= Window_Closed;
+                this.Close();
+            }
+            else
+            {
 
-            SinglePlayerWindow win = new SinglePlayerWindow(mazeProperties.MazeName,mazeProperties.MazeRows,mazeProperties.MazeCols);
-            win.Show();
-            this.Close();
+                string message = "Error connecting to server :[";
+                string caption = "Warning!!!!!!";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                DialogResult result;
+
+                // Displays the MessageBox.
+
+                result = System.Windows.Forms.MessageBox.Show(message, caption, buttons);
+
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+
+                    // Closes the parent form.
+
+                    this.Close();
+
+                }
+            }
+
 
         }
-
         private void Window_Closed(object sender, EventArgs e)
         {
         

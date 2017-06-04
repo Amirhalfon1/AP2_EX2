@@ -6,7 +6,7 @@
                xmlns:Controls="clr-namespace:GUI.controlls"
         xmlns:local="clr-namespace:GUI.Views"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
-        Title="MultiplayerSettingsWindows" Height="300" Width="300" Closed="Window_Closed">
+        Title="MultiplayerSettingsWindows" Height="300" Width="300" >
     <Grid TextBlock.FontSize="14" Height="259" VerticalAlignment="Bottom">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

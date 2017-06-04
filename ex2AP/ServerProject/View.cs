@@ -30,14 +30,21 @@ namespace ServerProject
             bool isShortConnection = false;
                 Task handleClient =  new Task(() =>
                 {
-                //string result = "dummy_start";
                 using (NetworkStream stream = client.GetStream())
                 using (StreamReader reader = new StreamReader(stream))
                 using (StreamWriter writer = new StreamWriter(stream))
                 {
                         while (true)
                         {
-                            string commandLine = reader.ReadLine();
+                            string commandLine = "";
+                            try
+                            {
+                                commandLine = reader.ReadLine();
+                            }catch(Exception e)
+                            {
+                                break;
+                            }
+                            
                             if(commandLine == null)
                             {
                                 continue;
@@ -46,13 +53,7 @@ namespace ServerProject
                             {
                                 isShortConnection = true;
                             }
-                            //Console.WriteLine(commandLine);
                             string result = controller.executeCommand(commandLine, client);
-                            if (result.Contains("close"))
-                            {
-                                Console.WriteLine("BLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-                            }
-                            //Console.WriteLine("the result we wanna send: {0}", result);
                             result += '\n';
                             result += '@';
                             writer.WriteLine(result);
@@ -61,6 +62,15 @@ namespace ServerProject
                             {
                                 Console.WriteLine("Client Disconnected!");
                                 break;
+                            }
+                            if (result != null)
+                            {
+                                if (result.Contains("close"))
+                                {
+                                    Console.WriteLine("Client Disconnected!");
+                                    
+                                    break;
+                                }
                             }
 
                         }
