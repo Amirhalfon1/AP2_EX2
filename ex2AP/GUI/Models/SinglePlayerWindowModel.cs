@@ -253,7 +253,7 @@ namespace GUI
                                 
                                 //break;/////////////////////
                             }
-                            otherClosedActuator(this, null);
+                            
                             Console.WriteLine("Writer Task Finished");
                         });
                         Task readerTask = new Task(() =>
@@ -293,7 +293,7 @@ namespace GUI
 
                                 }
 
-                                if (wholeFeedback == "close")
+                                if (feedback == "close")
                                 {
                                     writer.WriteLine(feedback);
                                     writer.Flush();
@@ -302,6 +302,7 @@ namespace GUI
                    
                                     Console.WriteLine("other player closed connection");
                                     getNewCommand = false;
+                                    otherClosedActuator(this, null);
                                 }
                                 
                             }

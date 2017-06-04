@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GUI.ViewModels;
+using System.Windows.Threading;
 
 namespace GUI.Views
 {
@@ -74,9 +75,14 @@ namespace GUI.Views
 
         protected void OtherClosedConnection(object sender, EventArgs e)
         {
-            MainMenu win = new MainMenu();
-            win.Show();
-            this.Close();
+            System.Windows.Application.Current.Dispatcher.Invoke(
+           DispatcherPriority.Background,
+           new Action(() =>
+           {
+               MainMenu win = new MainMenu();
+               win.Show();
+               this.Close();
+           }));
         }
 
     }
