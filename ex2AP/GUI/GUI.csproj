@@ -72,6 +72,7 @@
     <Compile Include="controlls\MazePropertiesControl.xaml.cs">
       <DependentUpon>MazePropertiesControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\CheckingConnection.cs" />
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\MP_SettingsModel.cs" />
     <Compile Include="Models\SettingsModel.cs" />

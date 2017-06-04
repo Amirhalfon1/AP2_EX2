@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GUI.ViewModels;
+using learnWPF.Models;
+using System.Windows.Forms;
 
 namespace GUI.Views
 {
@@ -34,28 +36,81 @@ namespace GUI.Views
         private void btnJoin_Click(object sender, RoutedEventArgs e)
         {
             string gameName;
-            if( (gameName=gamesComboBox.SelectedItem.ToString())!=null)
+
+            if (CheckingConnection.isConnectionEstablished)
             {
-                MultiPlayerWindow mpWindow = new MultiPlayerWindow(vm.joinGame(gameName));
-                mpWindow.Show();
-                this.Close();
+                if ((gameName = gamesComboBox.SelectedItem.ToString()) != null)
+                {
+                    MultiPlayerWindow mpWindow = new MultiPlayerWindow(vm.joinGame(gameName));
+                    mpWindow.Show();
+                    this.Close();
+                }
+
             }
-            
-            
+            else
+            {
+
+                string message = "Error connecting to server :[";
+                string caption = "Warning!!!!!!";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                DialogResult result;
+
+                // Displays the MessageBox.
+
+                result = System.Windows.Forms.MessageBox.Show(message, caption, buttons);
+
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+
+                    // Closes the parent form.
+
+                    this.Close();
+
+                }
+            }
+
         }
         protected void startClicked(object sender, EventArgs e)
         {
             string gameName;
-            if ((gameName = mazeProperties.MazeName) != null)
+
+            if (CheckingConnection.isConnectionEstablished)
             {
-                //MultiplayerWaitingScreen waitScreen = new MultiplayerWaitingScreen();
-                //waitScreen.ShowDialog();
-                //System.Windows.MessageBox.Show("Waiting for other player");
-                MultiPlayerWindow mpWindow = new MultiPlayerWindow(vm.startGame(gameName));
-                //waitScreen.Close();
-                mpWindow.Show();
-                this.Close();
+                if ((gameName = mazeProperties.MazeName) != null)
+                {
+                    //MultiplayerWaitingScreen waitScreen = new MultiplayerWaitingScreen();
+                    //waitScreen.ShowDialog();
+                    //System.Windows.MessageBox.Show("Waiting for other player");
+                    MultiPlayerWindow mpWindow = new MultiPlayerWindow(vm.startGame(gameName));
+                    //waitScreen.Close();
+                    mpWindow.Show();
+                    this.Close();
+                }
+
             }
+            else
+            {
+
+                string message = "Error connecting to server :[";
+                string caption = "Warning!!!!!!";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                DialogResult result;
+
+                // Displays the MessageBox.
+
+                result = System.Windows.Forms.MessageBox.Show(message, caption, buttons);
+
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+
+                    // Closes the parent form.
+
+                    this.Close();
+
+                }
+            }
+
+
 
         }
 

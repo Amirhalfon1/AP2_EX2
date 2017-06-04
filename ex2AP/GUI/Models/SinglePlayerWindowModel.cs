@@ -11,6 +11,7 @@ using MazeLib;
 using Newtonsoft.Json;
 using SearchAlgorithmsLib;
 using System.Collections.ObjectModel;
+using learnWPF.Models;
 
 namespace GUI
 {
@@ -112,7 +113,25 @@ namespace GUI
             int port = Properties.Settings.Default.ServerPort;
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse(Properties.Settings.Default.ServerIP), port);
             TcpClient client = new TcpClient();
-            client.Connect(ep);
+            
+            //checks if connection succeedded 
+            try {
+                client.Connect(ep);
+            } catch (ArgumentNullException e)
+            {
+                CheckingConnection.isConnectionEstablished = false;
+                return;
+            } catch (ArgumentOutOfRangeException e)
+            {
+                CheckingConnection.isConnectionEstablished = false;
+                return;
+            } catch (SocketException e)
+            {
+                CheckingConnection.isConnectionEstablished = false;
+                return;
+            }
+
+
             Console.WriteLine("Client has been connected");
             
             //string command = null;

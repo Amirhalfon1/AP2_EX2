@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GUI.ViewModels;
 using System.Windows.Threading;
+using learnWPF.Models;
+using System.Windows.Forms;
 
 namespace GUI.Views
 {
@@ -27,12 +29,14 @@ namespace GUI.Views
         {
             InitializeComponent();
             vm = new MultiPlayerViewModel();
-           
+
             this.DataContext = vm;
             this.KeyDown += MyBoard.UserControl_KeyDown;
             MyBoard.playerMoved += notifyPlayCommand;
             //MultiplayerWaitingScreen waitScreen = new MultiplayerWaitingScreen();
             //waitScreen.ShowDialog();
+
+
             startMultiplayerGame = new Task(() =>
             {
                 vm.StartGame(command);
@@ -47,8 +51,10 @@ namespace GUI.Views
             MyBoard.ReachedToGoal += PlayerReachedToGoal;
             OtherBoard.ReachedToGoal += OtherReachedToGoal;
             vm.SignCloseDelegate(OtherClosedConnection);
+
+
         }
-        protected void notifyPlayCommand(object sender,EventArgs e)
+        protected void notifyPlayCommand(object sender, EventArgs e)
         {
             vm.playToDirection(MyBoard.LastDirection);
         }

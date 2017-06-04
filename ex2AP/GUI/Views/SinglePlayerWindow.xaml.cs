@@ -13,7 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using learnWPF.Models;
 
 namespace GUI
 {
@@ -25,13 +25,16 @@ namespace GUI
         SinglePlayerViewModel vm;
         public SinglePlayerWindow(string mazeName , int mazeRows, int mazeCols)
         {
-            InitializeComponent();
-            vm = new SinglePlayerViewModel();
-            this.DataContext = vm;
-            vm.StartGame(mazeName,mazeRows,mazeCols);
-            //this.Loaded += myMaze.UserControl_Loaded;
-            this.KeyDown += myMaze.UserControl_KeyDown;
-            myMaze.ReachedToGoal += reachedToGoal;
+            if (CheckingConnection.isConnectionEstablished)
+            {
+                InitializeComponent();
+                vm = new SinglePlayerViewModel();
+                this.DataContext = vm;
+                vm.StartGame(mazeName, mazeRows, mazeCols);
+                //this.Loaded += myMaze.UserControl_Loaded;
+                this.KeyDown += myMaze.UserControl_KeyDown;
+                myMaze.ReachedToGoal += reachedToGoal;
+            }
 
 
         }
@@ -49,6 +52,7 @@ namespace GUI
         {
             Views.MainMenu menuWin = new Views.MainMenu();
             menuWin.Show();
+            menuWin.ShowDialog();
             this.Close();
 
         }
